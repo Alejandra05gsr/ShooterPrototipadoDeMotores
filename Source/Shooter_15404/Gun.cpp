@@ -13,8 +13,9 @@ AGun::AGun()
 	rootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Scene Root"));
 	SetRootComponent(rootComp);
 
-	skeletalmeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshGun"));
-	skeletalmeshComp->SetupAttachment(rootComp);
+
+	skeletalmeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshGun" )); 
+	skeletalmeshComp->SetupAttachment(rootComp ); 
 
 	flashParticle = CreateDefaultSubobject<UNiagaraComponent>(TEXT("FlashParticle"));
 	flashParticle->SetupAttachment(rootComp);

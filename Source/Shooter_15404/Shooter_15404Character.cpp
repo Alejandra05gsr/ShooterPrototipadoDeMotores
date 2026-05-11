@@ -111,6 +111,27 @@ void AShooter_15404Character::Look(const FInputActionValue& Value)
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
 }
 
+void AShooter_15404Character::RestartGameLevels()
+{
+	FString name = UGameplayStatics::GetCurrentLevelName(GetWorld());
+	UGameplayStatics::OpenLevel(GetWorld(), *name);
+}
+
+void AShooter_15404Character::UpdateHUD()
+{
+	AShooter_15404PlayerController* playerController = Cast< AShooter_15404PlayerController>(GetController());
+	if (playerController)
+	{
+		playerController->hudWidget->SetPorcent(health / maxHealth);
+		if (health <= 0)
+		{
+			FTimerHandle gameOverHandle;
+			GetWorldTimerManager().SetTimer(gameOverHandle, this, &AShooter_15404Character::RestartGameLevels, gameOverDelay, false);
+			
+		}
+	}
+}
+
 void AShooter_15404Character::Shoot()
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Shooting!!!"));
@@ -165,6 +186,7 @@ void AShooter_15404Character::OnDamageTaken(AActor* damagedActor, float Damage, 
 	if (isAlavie)
 	{
 		health -= Damage;
+		UpdateHUD();
 		UE_LOG(LogTemp, Warning, TEXT("Damaged %f"), health);
 		if (health <= 0)
 		{

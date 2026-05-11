@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Shooter_15404PlayerController.h"
 #include "Gun.h"
 #include "Shooter_15404Character.generated.h"
 
@@ -76,7 +77,6 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
-	void Shoot();
 
 public:
 
@@ -115,6 +115,13 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	bool isAlavie = true;
 
+	float gameOverDelay = 3.0f;
+
+	void RestartGameLevels();
+
+	void UpdateHUD();
+
+	void Shoot();
 
 
 public:
