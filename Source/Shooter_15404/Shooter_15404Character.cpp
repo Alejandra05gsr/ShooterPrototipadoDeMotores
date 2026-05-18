@@ -86,6 +86,8 @@ void AShooter_15404Character::SetupPlayerInputComponent(UInputComponent* PlayerI
 
 		//Shoot
 		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Started, this, &AShooter_15404Character::Shoot);
+	
+		EnhancedInputComponent->BindAction(Interact, ETriggerEvent::Started, this, &AShooter_15404Character::DoInteract);
 	}
 	else
 	{
@@ -179,6 +181,11 @@ void AShooter_15404Character::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();
+}
+
+void AShooter_15404Character::DoInteract()
+{
+	
 }
 
 void AShooter_15404Character::OnDamageTaken(AActor* damagedActor, float Damage, const UDamageType* DamageType, AController* instigatedBy, AActor* DamageCauser)

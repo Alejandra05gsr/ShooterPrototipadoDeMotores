@@ -55,6 +55,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	UInputAction* ShootAction;
 
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* Interact;
+
 
 	virtual void BeginPlay() override;
 
@@ -97,6 +100,9 @@ public:
 	virtual void DoJumpEnd();
 
 
+
+
+
 	UFUNCTION()
 	void OnDamageTaken(AActor* damagedActor, float Damage, const class UDamageType* DamageType, class AController* instigatedBy, AActor* DamageCauser);
 
@@ -122,6 +128,8 @@ public:
 	void UpdateHUD();
 
 	void Shoot();
+
+	void DoInteract();
 
 
 public:
