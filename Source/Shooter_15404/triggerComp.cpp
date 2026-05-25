@@ -11,6 +11,8 @@ UtriggerComp::UtriggerComp()
 void UtriggerComp::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	
 	if (moveActor)
 	{
 		moveComponent = moveActor->FindComponentByClass<UMove>();
@@ -19,6 +21,11 @@ void UtriggerComp::BeginPlay()
 	{
 		OnComponentBeginOverlap.AddDynamic(this, &UtriggerComp::OnOverlapBegin);
 		OnComponentEndOverlap.AddDynamic(this, &UtriggerComp::OnOverlapEnd);
+	}
+
+	if (IsMedKit && IsTriggered)
+	{
+		player->HealingPlayer(medKit);
 	}
 
 }

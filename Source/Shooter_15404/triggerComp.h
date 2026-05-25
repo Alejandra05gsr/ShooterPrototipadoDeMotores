@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
 #include "Move.h"
+#include "Shooter_15404Character.h"
 #include "triggerComp.generated.h"
 
 /**
@@ -30,6 +31,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool IsPreshurePlate = false;
 
+	UPROPERTY(EditAnywhere)
+	bool IsMedKit = false;
+
+	//UPROPERTY(EditAnywhere)
+	//bool CanMove = false;
+
+	float medKit = 20.0f;
+
 	UPROPERTY(VisibleAnywhere)
 	bool IsTriggered = false;
 
@@ -37,6 +46,9 @@ public:
 	AActor* moveActor;
 
 	UMove* moveComponent;
+
+	AShooter_15404Character* player;
+
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* overlappedComp, AActor* otherActor,

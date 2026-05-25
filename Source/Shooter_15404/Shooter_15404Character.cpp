@@ -188,6 +188,14 @@ void AShooter_15404Character::DoInteract()
 	
 }
 
+void AShooter_15404Character::HealingPlayer(float medkit)
+{
+	health += medkit;
+	UpdateHUD();
+}
+
+
+
 void AShooter_15404Character::OnDamageTaken(AActor* damagedActor, float Damage, const UDamageType* DamageType, AController* instigatedBy, AActor* DamageCauser)
 {
 	if (isAlavie)
@@ -204,3 +212,4 @@ void AShooter_15404Character::OnDamageTaken(AActor* damagedActor, float Damage, 
 	}
 
 }
+
