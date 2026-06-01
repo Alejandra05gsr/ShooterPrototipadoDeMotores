@@ -191,6 +191,7 @@ void AShooter_15404Character::DoInteract()
 void AShooter_15404Character::HealingPlayer(float medkit)
 {
 	health += medkit;
+	UE_LOG(LogTemp, Warning, TEXT("Healing"), health);
 	UpdateHUD();
 }
 

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
 #include "Move.h"
+#include "MedKit.h"
 #include "Shooter_15404Character.h"
 #include "triggerComp.generated.h"
 
@@ -37,7 +38,7 @@ public:
 	//UPROPERTY(EditAnywhere)
 	//bool CanMove = false;
 
-	float medKit = 20.0f;
+	float medKits = 20.0f;
 
 	UPROPERTY(VisibleAnywhere)
 	bool IsTriggered = false;
@@ -46,6 +47,8 @@ public:
 	AActor* moveActor;
 
 	UMove* moveComponent;
+
+	AMedKit* medKit;
 
 	AShooter_15404Character* player;
 

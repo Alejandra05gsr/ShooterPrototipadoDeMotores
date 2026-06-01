@@ -28,6 +28,6 @@ public:
 	float heal = 20.0f;
 
 
-	void HealPlayer();
+	void HealPlayer(float life);
 
 };

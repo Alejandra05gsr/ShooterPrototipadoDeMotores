@@ -22,12 +22,6 @@ void UtriggerComp::BeginPlay()
 		OnComponentBeginOverlap.AddDynamic(this, &UtriggerComp::OnOverlapBegin);
 		OnComponentEndOverlap.AddDynamic(this, &UtriggerComp::OnOverlapEnd);
 	}
-
-	if (IsMedKit && IsTriggered)
-	{
-		player->HealingPlayer(medKit);
-	}
-
 }
 
 void UtriggerComp::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -42,6 +36,8 @@ void UtriggerComp::trigger(bool triggerValue)
 	{
 		moveComponent->SetShouldMove(IsTriggered);
 	}
+
+	
 	
 }
 
@@ -53,16 +49,42 @@ void UtriggerComp::OnOverlapBegin(UPrimitiveComponent* overlappedComp, AActor* o
 		{
 			trigger(true);
 		}
+
+		if (IsMedKit && IsTriggered)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("MedKit"));
+			player = Cast<AShooter_15404Character>(otherActor);
+			if (!player) return; //Si quito esto crashea
+			player->HealingPlayer(medKits);
+
+			// Evitar dobles usos: desactivar colisión/overlaps inmediatamente
+			SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			SetGenerateOverlapEvents(false);
+
+			AActor* Owner = GetOwner();
+			if (Owner)
+			{
+				if (Owner->HasAuthority())
+				{
+					Owner->Destroy();
+				}
+			}
+		}
+		
 	}
 }
 
 void UtriggerComp::OnOverlapEnd(UPrimitiveComponent* overlappedComp, AActor* otherActor, UPrimitiveComponent* otherComp, int32 otherBodyIndex)
 {
-	if (otherActor && otherActor->ActorHasTag("Player"))
+	if (!IsMedKit) //Si no es medkit
 	{
-		if (IsTriggered)
+		if (otherActor && otherActor->ActorHasTag("Player"))
 		{
-			trigger(false);
+			if (IsTriggered)
+			{
+				trigger(false);
+			}
 		}
 	}
+	
 }

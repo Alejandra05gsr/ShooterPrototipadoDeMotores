@@ -25,8 +25,8 @@ void AMedKit::Tick(float DeltaTime)
 
 }
 
-void AMedKit::HealPlayer()
+void AMedKit::HealPlayer(float life)
 {
-
+	life += heal;
 }
 
