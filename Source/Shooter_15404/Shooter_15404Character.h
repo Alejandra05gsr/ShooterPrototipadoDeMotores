@@ -119,6 +119,11 @@ public:
 
 	float health;
 
+
+	bool canShoot = true;
+	bool canMove = true;
+
+
 	UPROPERTY(BlueprintReadOnly)
 	bool isAlavie = true;
 

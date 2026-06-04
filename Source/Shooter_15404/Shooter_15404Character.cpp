@@ -137,8 +137,12 @@ void AShooter_15404Character::UpdateHUD()
 void AShooter_15404Character::Shoot()
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Shooting!!!"));
-	if(currentGun)
-	currentGun->PullTrigger();
+	if (canShoot)
+	{
+		if (currentGun)
+			currentGun->PullTrigger();
+	}
+	
 }
 
 void AShooter_15404Character::DoMove(float Right, float Forward)
@@ -191,7 +195,12 @@ void AShooter_15404Character::DoInteract()
 void AShooter_15404Character::HealingPlayer(float medkit)
 {
 	health += medkit;
-	UE_LOG(LogTemp, Warning, TEXT("Healing"), health);
+	if (health >= maxHealth)
+	{
+		health = maxHealth;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Healing %f"), health);
 	UpdateHUD();
 }
 
@@ -206,8 +215,11 @@ void AShooter_15404Character::OnDamageTaken(AActor* damagedActor, float Damage, 
 		UE_LOG(LogTemp, Warning, TEXT("Damaged %f"), health);
 		if (health <= 0)
 		{
+			canShoot = false;
+			canMove = false;
 			isAlavie = false;
 			health = 0;
+			
 			GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		}
 	}

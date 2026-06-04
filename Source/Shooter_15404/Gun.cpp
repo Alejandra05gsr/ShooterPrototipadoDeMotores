@@ -31,7 +31,7 @@ void AGun::PullTrigger()
 
 	if (ownerController)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Bang!!!"));
+		//UE_LOG(LogTemp, Warning, TEXT("Bang!!!"));
 		FVector viewPointLocation;
 		FRotator viewpointRotator;
 		ownerController->GetPlayerViewPoint(viewPointLocation, viewpointRotator);

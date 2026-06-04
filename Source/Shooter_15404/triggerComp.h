@@ -38,7 +38,8 @@ public:
 	//UPROPERTY(EditAnywhere)
 	//bool CanMove = false;
 
-	float medKits = 20.0f;
+	UPROPERTY(EditAnywhere)
+	float medKits = 50.0f;
 
 	UPROPERTY(VisibleAnywhere)
 	bool IsTriggered = false;

@@ -45,30 +45,26 @@ void UtriggerComp::OnOverlapBegin(UPrimitiveComponent* overlappedComp, AActor* o
 {
 	if (otherActor && otherActor->ActorHasTag("Player"))
 	{
-		if (!IsTriggered)
+		if (IsMedKit)
 		{
-			trigger(true);
-		}
-
-		if (IsMedKit && IsTriggered)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("MedKit"));
 			player = Cast<AShooter_15404Character>(otherActor);
-			if (!player) return; //Si quito esto crashea
-			player->HealingPlayer(medKits);
 
-			// Evitar dobles usos: desactivar colisión/overlaps inmediatamente
-			SetCollisionEnabled(ECollisionEnabled::NoCollision);
-			SetGenerateOverlapEvents(false);
+			if (!player) return;
+
+			player->HealingPlayer(medKits);
 
 			AActor* Owner = GetOwner();
 			if (Owner)
 			{
-				if (Owner->HasAuthority())
-				{
-					Owner->Destroy();
-				}
+				Owner->Destroy();
 			}
+
+			return;
+		}
+
+		if (!IsTriggered)
+		{
+			trigger(true);
 		}
 		
 	}
