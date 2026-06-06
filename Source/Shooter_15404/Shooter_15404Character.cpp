@@ -122,6 +122,7 @@ void AShooter_15404Character::RestartGameLevels()
 void AShooter_15404Character::UpdateHUD()
 {
 	AShooter_15404PlayerController* playerController = Cast< AShooter_15404PlayerController>(GetController());
+
 	if (playerController)
 	{
 		playerController->hudWidget->SetPorcent(health / maxHealth);
@@ -129,8 +130,8 @@ void AShooter_15404Character::UpdateHUD()
 		{
 			FTimerHandle gameOverHandle;
 			GetWorldTimerManager().SetTimer(gameOverHandle, this, &AShooter_15404Character::RestartGameLevels, gameOverDelay, false);
-			
 		}
+
 	}
 }
 
@@ -198,6 +199,7 @@ void AShooter_15404Character::HealingPlayer(float medkit)
 	if (health >= maxHealth)
 	{
 		health = maxHealth;
+		UpdateHUD();
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("Healing %f"), health);
@@ -212,7 +214,7 @@ void AShooter_15404Character::OnDamageTaken(AActor* damagedActor, float Damage, 
 	{
 		health -= Damage;
 		UpdateHUD();
-		UE_LOG(LogTemp, Warning, TEXT("Damaged %f"), health);
+		//UE_LOG(LogTemp, Warning, TEXT("Damaged %f"), health);
 		if (health <= 0)
 		{
 			canShoot = false;
@@ -225,4 +227,5 @@ void AShooter_15404Character::OnDamageTaken(AActor* damagedActor, float Damage, 
 	}
 
 }
+
 

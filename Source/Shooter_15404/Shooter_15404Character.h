@@ -106,7 +106,6 @@ public:
 	UFUNCTION()
 	void OnDamageTaken(AActor* damagedActor, float Damage, const class UDamageType* DamageType, class AController* instigatedBy, AActor* DamageCauser);
 
-	void HealPlayer();
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGun> gunClass;
